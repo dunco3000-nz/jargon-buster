@@ -8,7 +8,7 @@ import { SearchTerms } from './components/SearchTerms';
 function App() {
   const [activeTab, setActiveTab] = useState<'add' | 'search'>('add');
   const [searchQuery, setSearchQuery] = useState('');
-  const [filter, setFilter] = useState<'understood' | 'notUnderstood'>('understood');
+  const [filter, setFilter] = useState<'all' | 'understood' | 'notUnderstood'>('all');
 
   return (
     <TermProvider>
@@ -59,6 +59,12 @@ function App() {
           </div>
           <div className="flex justify-center mt-4">
             <button
+              className={`px-4 py-2 mx-2 ${filter === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+              onClick={() => setFilter('all')}
+            >
+              All
+            </button>
+            <button
               className={`px-4 py-2 mx-2 ${filter === 'understood' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
               onClick={() => setFilter('understood')}
             >
@@ -71,7 +77,7 @@ function App() {
               Not Understood
             </button>
           </div>
-          <TermList filter={filter} />
+          <TermList filter={filter} searchQuery={searchQuery} />
         </main>
       </div>
     </TermProvider>

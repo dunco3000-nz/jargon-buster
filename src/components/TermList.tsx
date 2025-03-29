@@ -5,7 +5,7 @@ import { Term } from '../types';
 
 interface TermListProps {
   searchQuery: string;
-  filter: 'understood' | 'notUnderstood';
+  filter: 'all' | 'understood' | 'notUnderstood';
 }
 
 export function TermList({ searchQuery, filter }: TermListProps) {
@@ -46,7 +46,7 @@ export function TermList({ searchQuery, filter }: TermListProps) {
   };
 
   const filteredTerms = terms.filter(term =>
-    filter === 'understood' ? term.understood : !term.understood
+    filter === 'all' ? true : filter === 'understood' ? term.understood : !term.understood
   );
 
   return (
